@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('txlf.services', [])
 
 .factory('Data', function($scope, $ionicModal, $timeout) {
 
