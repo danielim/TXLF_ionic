@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('txlf', ['ionic', 'txlf.controllers', 'txlf.services', 'txlf.directives'])
+angular.module('txlf', ['ionic', 'txlf.controllers', 'txlf.services', 'txlf.directives', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -30,42 +30,116 @@ angular.module('txlf', ['ionic', 'txlf.controllers', 'txlf.services', 'txlf.dire
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: "/search",
+  // general information about TXLF conference
+  .state('app.geninfo', {
+    url: "/geninfo",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/geninfo.html",
       }
     }
   })
 
-  .state('app.browse', {
-    url: "/browse",
+  // News posted on the front page of Texaslinuxfest.org
+  .state('app.news', {
+    url: "/news",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: "templates/news.html"
       }
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
 
-  .state('app.single', {
-    url: "/playlists/:playlistId",
+  // Schedule list for the conference, ability to add talks to user schedule (app.myschedule)
+  .state('app.scheduleL', {
+    url: "/scheduleL",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: "templates/scheduleL.html"
+      }
+    }
+  })
+
+  // Display user schedule, allow deletion of talks.
+  .state('app.myschedule', {
+    url: "/myschedule",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/myschedule.html"
+      }
+    }
+  })
+
+  // Display address and integrate google maps.
+  .state('app.location', {
+    url: "/location",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/location.html",
+        controller: "LocationCtrl"
+      }
+    }
+  })
+
+  // Display an interior map of the venue.
+  .state('app.indoorMap', {
+    url: "/indoorMap",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/indoorMap.html"
+      }
+    }
+  })
+
+  // list speakers and their titles?
+  .state('app.speakersL', {
+    url: "/speakersL",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/speakersL.html",
+      }
+    }
+  })
+
+  // Display information about the speaker.
+  .state('app.speaker', {
+    url: "/speakersL/:speakerId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/speaker.html",
+      }
+    }
+  })
+
+  // display TXLF twitter feed @texaslinuxfest.
+  .state('app.twitter', {
+    url: "/twitter",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/twitter.html",
+      }
+    }
+  })
+
+  // integrate IRC channel through sockjs. May need ZNC bouncer?
+  .state('app.chatroom', {
+    url: "/chatroom",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/chatroom.html",
+      }
+    }
+  })
+
+  // about the author of the app. A big fat hire me button.
+  .state('app.about', {
+    url: "/about",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/about.html",
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/geninfo');
 });

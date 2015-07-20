@@ -1,4 +1,4 @@
-angular.module('txlf.controllers', [])
+angular.module('txlf.controllers', ['txlf.services', 'txlf.directives'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   
@@ -39,6 +39,10 @@ angular.module('txlf.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+})
+
+.controller('LocationCtrl', function($scope, DataMan) {
+
 })
 
 .controller('PlaylistsCtrl', function($scope) {
