@@ -1,17 +1,26 @@
 <ion-view view-title="Venue">
   <ion-content class="containerTXLF">
-  <h1>San Marcos Conference Center</h1>
+  <header>
+      <h1>San Marcos Conference Center</h1>
+  </header>
 
   <h2>Address:</h2>
-  <p>
-  1001 E. McCarty Lane<br />
-  San Marcos, Texas 78666<br />
-  USA<br />
-  </p>
+  <a href="geo:0,0?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666"/>
+      <div>
+          <button class="button"><i class="ion-ios-location"></i></button>
+      </div>
+      <div>
+      <p>
+        1001 E. McCarty Lane<br />
+        San Marcos, Texas 78666<br />
+        USA<br />
+      </p>
+      </div>
+  </a>
   <p>
   TEL: <a href="tel:+15123926450"> +1-512-392-6450</a><br />
   FAX: +1-512-392-6451<br />
   </p>
-    <button class="button" ng-click="DataMan.copyText('1001 E. McCarty Lane, San Marcos, Texas, 78666, USA')">Copy Address</button>
+    <button class="button button-positive" ng-click="copyText('1001 E. McCarty Lane, San Marcos, Texas, 78666, USA')">Copy Address</button>
   </ion-content>
 </ion-view>

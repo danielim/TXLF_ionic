@@ -1,22 +1,25 @@
-angular.module('txlf.services', ['ngCordova'])
+"use strict";
+angular.module("txlf.services", ["ngCordova"])
 
-.factory('rssParse', function($scope, $timeout) {
+.factory("rssParse", function($scope, $timeout) {
     //get the rss feed.
 })
 
-.factory('Login', function($scope, $ionicModal, $timeout) {
+.factory("Login", function($scope, $ionicModal, $timeout) {
 })
 
-.factory('DataMan', function($timeout, $cordovaClipboard) {
+.factory("DataMan", function() {
 
     var self = this;
 
-    self.copyText = function(value) {
+/* //This is not working for some reason
+ *  self.copyText = function(value) {
         $cordovaClipboard.copy(value).then(function(){
-            console.log('Copied.');
+            console.log("Copied.");
         }, function(err) {
-            console.error('There was an error: ' + err);
+            console.error("There was an error: " + err);
         });
     }
+*/
     return self;
-}); 
+});
