@@ -1,5 +1,5 @@
 "use strict";
-angular.module("txlf.controllers", ["txlf.services", "txlf.directives", "ngCordova"])
+angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives", "ngCordova"])
 
 .controller("AppCtrl", function($scope, $ionicModal, $timeout) {
 
@@ -54,11 +54,12 @@ angular.module("txlf.controllers", ["txlf.services", "txlf.directives", "ngCordo
     };
 
     $scope.geoLink = function(){
-                        var isAndroid = ionic.PlatformisAndroid();
+                        var isAndroid = ionic.Platform.isAndroid();
+                        console.log(isAndroid);
                         if(isAndroid){
-                             $scope.mapLink = "geo:0,0?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666";
+                           $scope.mapLink = "geo:0,0?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666";
                         } else {
-                            $scope.mapLink = "http://maps.apple.com/?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666";
+                           $scope.mapLink = "http://maps.apple.com/?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666";
                         }
     };
 
@@ -78,18 +79,18 @@ angular.module("txlf.controllers", ["txlf.services", "txlf.directives", "ngCordo
        }else if(key == 'link'){
           return "ng-hide"
        } else {
-          return "item"
+          return "item item-text-wrap"
        }; 
     };
 
 })
 
-.controller("barcodectrl", function($scope, qrscan) {
-    $scope.imagedata = qrscan.imagedata;
-    $scope.contactdata = qrscan.contactdata;
+.controller("BarcodeCtrl", function($scope, QRScan) {
+    $scope.imageData = QRScan.imageData;
+    $scope.contactData = QRScan.contactData;
 
-    $scope.scanbarcode = function(){
-        qrscan.scanqr();
+    $scope.scanBarcode = function(){
+        QRScan.scanQR();
     };
 
 })

@@ -21,7 +21,11 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
   });
 })
 
+.config(function ($compileProvider) {  
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|geo):/);
+})
 .config(function($stateProvider, $urlRouterProvider) {
+
   $stateProvider
 
   .state("app", {
