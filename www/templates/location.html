@@ -1,11 +1,11 @@
 <ion-view view-title="Venue">
-  <ion-content class="containerTXLF">
+  <ion-content class="containerTXLF" ng-controller="LocationCtrl">
   <header>
       <h1>San Marcos Conference Center</h1>
   </header>
 
   <h2>Address:</h2>
-  <a href="geo:0,0?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666"/>
+  <a onload="geoLink();" href="{{ mapLink }}"/>
       <div>
           <button class="button"><i class="ion-ios-location"></i></button>
       </div>

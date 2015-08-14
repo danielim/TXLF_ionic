@@ -1,9 +1,22 @@
 <ion-view view-title="Playlists">
-  <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
-      </ion-item>
-    </ion-list>
+  <ion-content ng-controller="SchedCtrl">
+  <h1 class="headroom">Friday, August 21</h1>
+    <table class="list list-inset">
+        <tbody ng-repeat="i in schedFri">
+            <tr ng-repeat="(key, value) in i">
+                <td ng-class="schedClass('{{key}}');"><a ng-href="{{i.link}}">{{value}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+        
+  <h1 class="headroom">Saturday, August 22</h1>
+    <table class="list list-inset">
+        <tbody ng-repeat="x in schedSat">
+            <tr ng-repeat="(key, value) in x">
+                <td ng-class="schedClass('{{key}}');"><a ng-href="{{x.link}}">{{value}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+ 
   </ion-content>
 </ion-view>

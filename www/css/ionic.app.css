@@ -7674,3 +7674,16 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.containerTXLF {
+  line-height: 2em;
+  display: block;
+  width: 90%;
+  padding: 2em 0;
+  margin: 1em auto; }
+
+body {
+  line-height: 1.2em; }
+
+body {
+  line-height: 1.2em; }

@@ -41,6 +41,17 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
     }
   })
 
+  // Code of Conduct for Texaslinuxfest.org
+  .state("app.coc", {
+    url: "/coc",
+    controller: "DisplayCtrl",
+    views: {
+      "menuContent": {
+        templateUrl: "templates/coc.html"
+      }
+    }
+  })
+  
   // News posted on the front page of Texaslinuxfest.org
   .state("app.news", {
     url: "/news",
@@ -122,6 +133,15 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
     }
   })
 
+  // QR Code scanner for members to add contacts
+  .state("app.bcscan", {
+    url: "/bcscan",
+    views: {
+      "menuContent": {
+        templateUrl: "templates/bcscan.html"
+      }
+    }
+  })
   // integrate IRC channel through sockjs. May need ZNC bouncer?
   .state("app.chatroom", {
     url: "/chatroom",

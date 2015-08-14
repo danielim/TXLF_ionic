@@ -43,6 +43,7 @@ angular.module("txlf.controllers", ["txlf.services", "txlf.directives", "ngCordo
 })
 
 .controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard) {
+    $scope.mapLink = "";
 
     $scope.copyText = function(value){
                         $cordovaClipboard.copy(value).then(function(){
@@ -52,18 +53,50 @@ angular.module("txlf.controllers", ["txlf.services", "txlf.directives", "ngCordo
                         });
     };
 
+    $scope.geoLink = function(){
+                        var isAndroid = ionic.PlatformisAndroid();
+                        if(isAndroid){
+                             $scope.mapLink = "geo:0,0?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666";
+                        } else {
+                            $scope.mapLink = "http://maps.apple.com/?q=1001+E+McCarty+Ln,+San+Marcos,+TX+78666";
+                        }
+    };
+
 })
 
-.controller("PlaylistsCtrl", function($scope) {
-  $scope.playlists = [
-    { title: "Reggae", id: 1 },
-    { title: "Chill", id: 2 },
-    { title: "Dubstep", id: 3 },
-    { title: "Indie", id: 4 },
-    { title: "Rap", id: 5 },
-    { title: "Cowbell", id: 6 }
-  ];
+.controller("SchedCtrl", function($scope, $http) {
+    $http.get('json/unnestSchedFri.json').success(function(data) {
+        $scope.schedFri = data;
+    });
+    $http.get('json/unnestSchedSat.json').success(function(data) {
+        $scope.schedSat = data;
+    });
+
+    $scope.schedClass = function(key){
+       if(key == 'time'){
+          return "item item-divider";
+       }else if(key == 'link'){
+          return "ng-hide"
+       } else {
+          return "item"
+       }; 
+    };
+
 })
 
-.controller("PlaylistCtrl", function($scope, $stateParams) {
+.controller("barcodectrl", function($scope, qrscan) {
+    $scope.imagedata = qrscan.imagedata;
+    $scope.contactdata = qrscan.contactdata;
+
+    $scope.scanbarcode = function(){
+        qrscan.scanqr();
+    };
+
+})
+
+.controller("DisplayCtrl", function($scope, Parser) {
+    $scope.dataCoC = Parser.dataCoC;
+
+
+
 });
