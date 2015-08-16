@@ -5,7 +5,7 @@
         Texas Linux Fest unofficial App.
     </description>
   <author email="chen@daniel.im" href="http://daniel.im/">
-        Thirty Minutes Productions
+      Fiaca Studios
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -16,9 +16,17 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
+
+
+  <!-- Features -->
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+
+  <feature name="InAppBrowser">
+    <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+  </feature>
+
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
@@ -39,11 +47,21 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
 
+    <!-- Note: read up on CSP too, it will hinder what the app can do -->
     <!-- Allow tel: links to open the dialer -->
     <allow-intent href="tel:*" />
 
     <!-- Allow geo: links to open maps -->
     <allow-intent href="geo:*" />
+
+    <!-- allow access to external sources -->
+    <access origin="https://*.texaslinuxfest.org" />
+    <access origin="https://*.daniel.im" />
+    <access origin="http://*.texaslinuxfest.org" />
+    <access origin="http://*.daniel.im" />
+
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
 
   </platform>
 </widget>

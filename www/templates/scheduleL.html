@@ -4,7 +4,7 @@
     <table class="list list-inset">
         <tbody ng-repeat="i in schedFri">
             <tr ng-repeat="(key, value) in i">
-                <td ng-class="schedClass('{{key}}');"><a ng-href="{{i.link}}">{{value}}</a></td>
+                <td ng-class="schedClass('{{key}}');"><a ng-href="{{i.link}}" ng-click="openUrl('{{i.link}}');">{{value}}</a></td>
             </tr>
         </tbody>
     </table>
@@ -13,7 +13,7 @@
     <table class="list list-inset">
         <tbody ng-repeat="x in schedSat">
             <tr ng-repeat="(key, value) in x">
-                <td ng-class="schedClass('{{key}}');"><a ng-href="{{x.link}}">{{value}}</a></td>
+                <td ng-class="schedClass('{{key}}');"><a ng-href="{{x.link}}" ng-click="openUrl('{{x.link}}');">{{value}}</a></td>
             </tr>
         </tbody>
     </table>

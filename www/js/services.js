@@ -6,8 +6,19 @@ angular.module("txlf.services", ["ngCordova"])
 })
 
 .factory("Login", function($scope, $ionicModal) {
-    
     "use strict";
+})
+
+.factory("Urlf", function($scope) {
+    "use strict";
+    var self = this;
+
+    self.openUrl = function(urlString){
+        var myURL = encodeURI(urlString);
+        window.open(myURL, '_blank');
+    };
+
+    return self;
 })
 
 .factory("DataMan", function() {

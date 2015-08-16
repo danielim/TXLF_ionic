@@ -1,8 +1,7 @@
-"use strict";
 angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives", "ngCordova"])
 
 .controller("AppCtrl", function($scope, $ionicModal, $timeout) {
-
+    "use strict";
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -42,8 +41,13 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
   };
 })
 
-.controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard) {
+.controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard, Url) {
+    "use strict";
     $scope.mapLink = "";
+
+    $scope.openUrl = function(myURL){
+        Urlf.openUrl(myURL);
+    };
 
     $scope.copyText = function(value){
                         $cordovaClipboard.copy(value).then(function(){
@@ -65,37 +69,45 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 
 })
 
-.controller("SchedCtrl", function($scope, $http) {
-    $http.get('json/unnestSchedFri.json').success(function(data) {
+.controller("SchedCtrl", function($scope, $http, Urlf) {
+    "use strict";
+
+    $scope.openUrl = function(myURL){
+        Urlf.openUrl(myURL);
+    };
+
+    $http.get("json/unnestSchedFri.json").success(function(data) {
         $scope.schedFri = data;
     });
-    $http.get('json/unnestSchedSat.json').success(function(data) {
+    $http.get("json/unnestSchedSat.json").success(function(data) {
         $scope.schedSat = data;
     });
 
     $scope.schedClass = function(key){
-       if(key == 'time'){
+       if(key === "time"){
           return "item item-divider";
-       }else if(key == 'link'){
-          return "ng-hide"
+       }else if(key === "link"){
+          return "ng-hide";
        } else {
-          return "item item-text-wrap"
-       }; 
+          return "item item-text-wrap";
+       }
     };
 
 })
 
-.controller("BarcodeCtrl", function($scope, QRScan) {
-    $scope.imageData = QRScan.imageData;
-    $scope.contactData = QRScan.contactData;
+.controller("BarcodeCtrl", function($scope, QRscan) {
+    "use strict";
+    $scope.imageData = QRscan.imageData;
+    $scope.contactData = QRscan.contactData;
 
     $scope.scanBarcode = function(){
-        QRScan.scanQR();
+        QRscan.scanQR();
     };
 
 })
 
 .controller("DisplayCtrl", function($scope, Parser) {
+    "use strict";
     $scope.dataCoC = Parser.dataCoC;
 
 

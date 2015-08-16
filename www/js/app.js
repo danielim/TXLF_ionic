@@ -18,11 +18,15 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // On device ready, load cordova.plugins.inappbrowser.
+    window.open = cordova.InAppBrowser.open;
+
   });
 })
 
-.config(function ($compileProvider) {  
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|geo):/);
+.config(function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|http|ftp|mailto|file|tel|geo):/);
 })
 .config(function($stateProvider, $urlRouterProvider) {
 
