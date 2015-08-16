@@ -1,6 +1,6 @@
 angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives", "ngCordova"])
 
-.controller("AppCtrl", function($scope, $ionicModal, $timeout) {
+.controller("AppCtrl", function($scope, $ionicModal, $timeout, Urlf) {
     "use strict";
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -39,15 +39,19 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
       $scope.closeLogin();
     }, 1000);
   };
-})
 
-.controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard, Url) {
-    "use strict";
-    $scope.mapLink = "";
 
-    $scope.openUrl = function(myURL){
+  // custom services/factories
+
+    $scope.openUrl = function(myURL) {
         Urlf.openUrl(myURL);
     };
+
+})
+
+.controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard) {
+    "use strict";
+    $scope.mapLink = "";
 
     $scope.copyText = function(value){
                         $cordovaClipboard.copy(value).then(function(){
@@ -69,12 +73,8 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 
 })
 
-.controller("SchedCtrl", function($scope, $http, Urlf) {
+.controller("SchedCtrl", function($scope, $http) {
     "use strict";
-
-    $scope.openUrl = function(myURL){
-        Urlf.openUrl(myURL);
-    };
 
     $http.get("json/unnestSchedFri.json").success(function(data) {
         $scope.schedFri = data;

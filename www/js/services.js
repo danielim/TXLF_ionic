@@ -9,13 +9,17 @@ angular.module("txlf.services", ["ngCordova"])
     "use strict";
 })
 
-.factory("Urlf", function($scope) {
+.factory("Urlf", function() {
     "use strict";
     var self = this;
 
     self.openUrl = function(urlString){
-        var myURL = encodeURI(urlString);
-        window.open(myURL, '_blank');
+        if(urlString !== "") {
+            var myURL = encodeURI(urlString);
+            window.open(myURL, "_blank");
+        } else {
+            return null;
+        }
     };
 
     return self;
