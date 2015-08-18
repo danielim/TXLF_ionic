@@ -130,7 +130,7 @@ angular.module("txlf.services", ["ngCordova"])
     "use strict";
 
     var self = this;
-    var contactList = [];
+    self.contactList = [];
 
     self.storeContactList = function(QRtext){
         var json = JSON.parse(QRtext);
