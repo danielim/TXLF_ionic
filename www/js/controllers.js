@@ -73,8 +73,10 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 
 })
 
-.controller("SchedCtrl", function($scope, $http) {
+.controller("SchedCtrl", function($scope, $http, DataMan) {
     "use strict";
+
+    $scope.MyScheduleJSON = DataMan.mySchedule;
 
     $http.get("json/unnestSchedFri.json").success(function(data) {
         $scope.schedFri = data;
@@ -85,13 +87,18 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 
     $scope.schedClass = function(key){
        if(key === "time"){
-          return "item item-divider";
+          return "item item-divider item-complex-divider";
        }else if(key === "link"){
           return "ng-hide";
        } else {
           return "item item-text-wrap";
        }
     };
+
+    $scope.addMySched = function(item){
+        DataMan.storeMySchedule(item.time, item.title, item.link);
+    };
+
 
 })
 

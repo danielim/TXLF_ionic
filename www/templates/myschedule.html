@@ -1,8 +1,8 @@
-<ion-view view-title="Playlists">
+<ion-view view-title="My Schedule">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
+      <ion-item>
+        {{MySchedule | json}}
       </ion-item>
     </ion-list>
   </ion-content>

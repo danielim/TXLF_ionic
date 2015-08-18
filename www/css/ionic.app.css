@@ -7687,5 +7687,14 @@ a.button {
   width: 100%;
   min-height: 100%; }
 
+.item-complex-divider > .item-content {
+  background-color: inherit; }
+
 body {
   line-height: 1.2em; }
+
+a {
+  text-decoration: none; }
+
+.item-divider {
+  font-weight: bold; }

@@ -1,11 +1,63 @@
 <ion-view view-title="Schedule">
   <ion-content ng-controller="SchedCtrl">
-  <h1 class="headroom">Friday, August 21</h1>
+
+  <h1 class="headroom">Friday, August 21st</h1>
+        <ion-list class="list list-inset" >
+        <span ng-repeat="i in schedFri">
+            <span ng-repeat="(key, value) in i"> 
+                <ion-item ng-class="schedClass('{{key}}');">
+                <span ng-if="key == 'title'">
+               <a ng-attr-href="{{i.link ? '#' : undefined}}" ng-click="openUrl('{{i.link}}');">
+            {{value}}
+               </a>
+        <ion-option-button class="button-balanced" ng-click="addMySched(i);">
+                    add
+                </ion-option-button>
+                </span>
+                <span ng-if="key == 'time'">
+               <a ng-attr-href="{{i.link ? '#' : undefined}}" ng-click="openUrl('{{i.link}}');">
+            {{value}}
+               </a>
+                </span>
+            </ion-item>
+            </span>
+        </ion-list>
+        
+  <h1 class="headroom">Saturday, August 22nd</h1>
+        <ion-list class="list list-inset" >
+        <span ng-repeat="x in schedSat">
+            <span ng-repeat="(key, value) in x"> 
+                <ion-item ng-class="schedClass('{{key}}');">
+                <span ng-if="key == 'title'">
+               <a ng-attr-href="{{x.link ? '#' : undefined}}" ng-click="openUrl('{{x.link}}');">
+            {{value}}
+               </a>
+                <ion-option-button class="button-balanced" ng-click="addMySched(x);">
+                    add
+                </ion-option-button>
+                </span>
+                <span ng-if="key == 'time'">
+               <a ng-attr-href="{{x.link ? '#' : undefined}}" ng-click="openUrl('{{x.link}}');">
+            {{value}}
+               </a>
+                </span>
+            </ion-item>
+            </span>
+        </ion-list>
+      
+
+
+
+
+<!--  <h1 class="headroom">Friday, August 21</h1>
     <table class="list list-inset">
         <tbody ng-repeat="i in schedFri">
             <tr ng-repeat="(key, value) in i">
                 <td ng-class="schedClass('{{key}}');">
                     <a ng-attr-href="{{i.link ? '#' : undefined}}" ng-click="openUrl('{{i.link}}');">{{value}}</a>
+                    <ion-option-button class="button-balanced" ng-click="add(item)">
+                        Add
+                    </ion-option-button>
                 </td>
             </tr>
         </tbody>
@@ -20,7 +72,7 @@
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
  
   </ion-content>
 </ion-view>

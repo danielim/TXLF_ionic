@@ -35,6 +35,7 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
 
     var dbMySchedule = "CREATE TABLE IF NOT EXISTS MySchedule (" +
                    "msid INTEGER PRIMARY KEY, " +
+                   "time TEXT, " +
                    "title TEXT, " +
                    "link TEXT" +
                    ")";

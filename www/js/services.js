@@ -126,12 +126,14 @@ angular.module("txlf.services", ["ngCordova"])
     return self;
 })
 
-.factory("DataMan", function(Localdb) {
+.factory("DataMan", function(Localdb, Toast) {
     "use strict";
 
     var self = this;
     self.contactList = [];
+    self.mySchedule = [];
 
+    // Contact List methods
     self.storeContactList = function(QRtext){
         var json = JSON.parse(QRtext);
         var name = json.n;
@@ -156,8 +158,33 @@ angular.module("txlf.services", ["ngCordova"])
             console.log("fetchContactList error: " + err);
         });
     };
-    console.log("self.contactlist dataman scope: " + self.contactList);
-    console.log("JSON stringify self.contactList DataMan: " + JSON.stringify(self.contactList));
+
+    // My Schedule methods.
+    self.storeMySchedule = function(time, title, link){
+        var dupCheck = Localdb.getBy("MySchedule", "title", "title", title);
+        if (dupCheck === title) {
+            Toast.showToast("Presentation already in your schedule.", "short", "bottom");
+        } else {
+
+        Localdb.inputMySchedule(time, title, link).then(function(){
+            Toast.showToast("Presentation stored.", "short", "bottom");
+        }, function(err) {
+            Toast.showToast("Error: Presentation not stored.\n" + err, "short", "bottom");
+        });
+        }
+        self.fetchMySchedule();
+    };
+
+    self.fetchMySchedule = function(){
+        Localdb.getMySchedule().then(function(res){
+            console.log("fetch result MySchedule string: " + JSON.stringify(res));
+            angular.copy(res, self.mySchedule);
+        }, function(err){
+            console.log("fetchMySchedule error: " + err);
+        });
+    };
+
+
 
 /* //This is not working inside the factory for some reason
  *  self.copyText = function(value) {
@@ -223,7 +250,7 @@ angular.module("txlf.services", ["ngCordova"])
 
     // Get data from database
     self.getMySchedule = function(){
-        return DBA.query("SELECT msid, title, link FROM MySchedule")
+        return DBA.query("SELECT msid, time, title, link FROM MySchedule")
             .then(function(result){
                 return DBA.getAll(result);
             });
@@ -246,10 +273,22 @@ angular.module("txlf.services", ["ngCordova"])
             });
     };
 
+    // Get single items.
+
+    self.getBy = function(table, query, key, value) {
+            var parameters = [value];
+                return DBA.query("SELECT " + query + " FROM " + table + " WHERE " + key + " = (?)", parameters)
+                .then(function(result) {
+                    return DBA.getById(result);
+                });
+    };
+
+
+
    // Input into database
-    self.inputMySchedule = function(title, link) {
-        var parameters = [title, link];
-        return DBA.query("INSERT INTO MySchedule (title, link) VALUES (?, ?)", parameters);
+    self.inputMySchedule = function(time, title, link) {
+        var parameters = [time, title, link];
+        return DBA.query("INSERT INTO MySchedule (time, title, link) VALUES (?, ?, ?)", parameters);
     };
 
     self.inputContactList = function(name, workphone, mobile, email, website, title, company, address) {
