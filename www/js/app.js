@@ -1,13 +1,15 @@
-"use strict";
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // "starter" is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of "requires"
 // "starter.controllers" is found in controllers.js
+var db = null;
 angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.directives", "ngCordova"])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $timeout, $cordovaSQLite) {
+"use strict";
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,13 +24,98 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
     // On device ready, load cordova.plugins.inappbrowser.
     window.open = cordova.InAppBrowser.open;
 
+    //#######
+    // Database creation and opening.
+    //#######
+    if (window.cordova) {
+        db = $cordovaSQLite.openDB("txlf.db");
+    } else {
+        db = window.openDatabase("txlf.db", "1.0", "TXLF", -1);
+    }
+
+    var dbMySchedule = "CREATE TABLE IF NOT EXISTS MySchedule (" +
+                   "msid INTEGER PRIMARY KEY, " +
+                   "title TEXT, " +
+                   "link TEXT" +
+                   ")";
+
+    var dbContactList = "CREATE TABLE IF NOT EXISTS ContactList (" +
+                 "clid INTEGER PRIMARY KEY, " +
+                 "name TEXT, " +
+                 "workphone TEXT, " +
+                 "mobile TEXT, " +
+                 "email TEXT, " +
+                 "website TEXT, " +
+                 "title TEXT, " +
+                 "company TEXT, " +
+                 "address TEXT" +
+                 ")";
+
+    var dbWebCache = "CREATE TABLE IF NOT EXISTS WebCache (" +
+                   "wid INTEGER PRIMARY KEY, " +
+                   "link TEXT, " +
+                   "data TEXT" +
+                   ")";
+
+    // WARNING: TESTING ONLY, WILL DROP TABLE EVERY TIME.
+    var dropAllTables = function(){
+        $cordovaSQLite.execute( db, "DROP TABLE IF EXISTS MySchedule")
+        .then(
+            function(success){
+             console.log(success);
+             console.log("MySchedule tables dropped");
+            },
+            function(fail){
+             console.log(fail);
+             console.log("MySchedule tables not dropped");
+            }
+        );
+    $cordovaSQLite.execute( db, "DROP TABLE IF EXISTS ContactList")
+        .then(
+            function(success){
+             console.log(success);
+             console.log("ContactList tables dropped");
+            },
+            function(fail){
+             console.log(fail);
+             console.log("ContactList tables not dropped");
+            }
+        );
+    $cordovaSQLite.execute( db, "DROP TABLE IF EXISTS WebCache")
+        .then(
+            function(success){
+             console.log(success);
+             console.log("WebCache tables dropped");
+            },
+            function(fail){
+             console.log(fail);
+             console.log("WebCache tables not dropped");
+            }
+        );
+    };
+
+    // create tables for the database if they don't exist
+    var createTables = function(){
+            $cordovaSQLite.execute( db, dbMySchedule ).then(console.log(dbMySchedule), function(error){console.log(error)});
+
+            $cordovaSQLite.execute( db, dbContactList ).then(console.log(dbContactList), function(error){console.log(error)});
+
+            $cordovaSQLite.execute( db, dbWebCache ).then(console.log("WebCache table created"), function(error){console.log(error)});
+    };
+
+    dropAllTables();
+    createTables();
+
   });
 })
 
 .config(function ($compileProvider) {
+    "use strict";
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|http|ftp|mailto|file|tel|geo):/);
 })
+
 .config(function($stateProvider, $urlRouterProvider) {
+    "use strict";
 
   $stateProvider
 
@@ -59,7 +146,7 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
       }
     }
   })
-  
+
   // News posted on the front page of Texaslinuxfest.org
   .state("app.news", {
     url: "/news",

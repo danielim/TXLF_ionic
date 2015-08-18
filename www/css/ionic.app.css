@@ -7682,8 +7682,10 @@ a.button {
   padding: 2em 0;
   margin: 1em auto; }
 
-body {
-  line-height: 1.2em; }
+.iframe {
+  height: 100%;
+  width: 100%;
+  min-height: 100%; }
 
 body {
   line-height: 1.2em; }

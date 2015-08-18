@@ -95,14 +95,17 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 
 })
 
-.controller("BarcodeCtrl", function($scope, QRscan) {
+.controller("BarcodeCtrl", function($scope, QRscan, DataMan) {
     "use strict";
-    $scope.imageData = QRscan.imageData;
-    $scope.contactData = QRscan.contactData;
 
     $scope.scanBarcode = function(){
         QRscan.scanQR();
     };
+
+    $scope.ContactListJSON = DataMan.contactList;
+    $scope.ContactList = JSON.stringify(DataMan.contactList);
+
+
 
 })
 

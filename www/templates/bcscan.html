@@ -1,6 +1,10 @@
-<ion-view view-title="News">
+<ion-view view-title="QR Code Scanner">
+  
   <ion-content class="containerTXLF" ng-controller="BarcodeCtrl">
     <h1>Texas Linux Fest 2015</h1>
     <button class="button" ng-click="scanBarcode()">Scan QR Code</button>
+    
+    <p>{{ ContactListJSON | json }}</p>
+    <p>{{ ContactList }}</p>
   </ion-content>
 </ion-view>
