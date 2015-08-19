@@ -161,17 +161,22 @@ angular.module("txlf.services", ["ngCordova"])
 
     // My Schedule methods.
     self.storeMySchedule = function(time, title, link){
-        var dupCheck = Localdb.getBy("MySchedule", "title", "title", title);
-        if (dupCheck === title) {
-            Toast.showToast("Presentation already in your schedule.", "short", "bottom");
-        } else {
 
-        Localdb.inputMySchedule(time, title, link).then(function(){
-            Toast.showToast("Presentation stored.", "short", "bottom");
-        }, function(err) {
-            Toast.showToast("Error: Presentation not stored.\n" + err, "short", "bottom");
+        // Calling getBy(title) to check if there's a duplicate in the database
+        Localdb.getBy("MySchedule", "title", "title", title).then(function(res){
+            console.log("dupCheck res: " + JSON.stringify(res));
+            if (JSON.stringify(res) !== undefined) {
+                Toast.showToast("Presentation already in your schedule.", "short", "bottom");
+            } else {
+                Localdb.inputMySchedule(time, title, link).then(function(){
+                    Toast.showToast("Presentation stored.", "short", "bottom");
+                }, function(err) {
+                    Toast.showToast("Error: Presentation not stored.\n" + err, "short", "bottom");
+                });
+            }
+        }, function(err){
+            console.log("dupCheck err: " + err);
         });
-        }
         self.fetchMySchedule();
     };
 

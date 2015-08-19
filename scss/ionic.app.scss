@@ -22,6 +22,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 @import "scss/customscss/variables";
+@import "scss/customscss/mixins";
 @import "scss/customscss/layout";
 @import "scss/customscss/typography";
 @import "scss/customscss/colors";

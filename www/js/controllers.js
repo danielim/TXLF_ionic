@@ -52,6 +52,7 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 .controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard) {
     "use strict";
     $scope.mapLink = "";
+    $scope.iterateFri = [];
 
     $scope.copyText = function(value){
                         $cordovaClipboard.copy(value).then(function(){
@@ -85,17 +86,13 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
         $scope.schedSat = data;
     });
 
-    $scope.schedClass = function(key){
-       if(key === "time"){
-          return "item item-divider item-complex-divider";
-       }else if(key === "link"){
-          return "ng-hide";
-       } else {
-          return "item item-text-wrap";
-       }
+    $scope.getTime = function(time) {
+        $scope.schedTime = time;
     };
 
     $scope.addMySched = function(item){
+
+        console.log("addMySched: " + item.time);
         DataMan.storeMySchedule(item.time, item.title, item.link);
     };
 

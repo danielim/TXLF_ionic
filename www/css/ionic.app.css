@@ -7698,3 +7698,8 @@ a {
 
 .item-divider {
   font-weight: bold; }
+
+.item-content a:link, .item-content a:visited {
+  color: #0071B3; }
+.item-content a:active {
+  color: #B37100; }
