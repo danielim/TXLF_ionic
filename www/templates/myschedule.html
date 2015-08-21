@@ -1,9 +1,32 @@
 <ion-view view-title="My Schedule">
   <ion-content ng-controller="SchedCtrl">
-    <ion-list>
-      <ion-item>
-        {{MyScheduleJSON | json}}
-      </ion-item>
-    </ion-list>
+        <ion-list class="list list-inset">
+  <h2 class="title">My Friday Schedule August 21st</h2>
+            <span ng-repeat="i in MyScheduleFri | groupBy: 'time' | toArray: true | orderBy: min"> 
+                <ion-item class="item item-divider item-complex-divider">
+                            {{i.$key}}
+                </ion-item>
+                <ion-item ng-repeat="sched in i" class="item item-text-wrap" ng-attr-href="{{sched.link ? '#' : undefined}}" ng-click="openUrl('{{sched.link}}');">
+                            {{sched.title}}
+                            <ion-option-button class="button-assertive" ng-click="delMySched(sched)">
+                            Remove
+                            </ion-option-button>
+                </ion-item>
+            </span>
+        </ion-list>
+        <ion-list class="list list-inset">
+  <h2 class="title">My Saturday Schedule August 22nd</h2>
+            <span ng-repeat="i in MyScheduleSat | groupBy: 'time' | toArray: true | orderBy: min"> 
+                <ion-item class="item item-divider item-complex-divider">
+                            {{i.$key}}
+                </ion-item>
+                <ion-item ng-repeat="sched in i" class="item item-text-wrap" ng-attr-href="{{sched.link ? '#' : undefined}}" ng-click="openUrl('{{sched.link}}');">
+                            {{sched.title}}
+                            <ion-option-button class="button-assertive" ng-click="delMySched(sched)">
+                            Remove
+                            </ion-option-button>
+                </ion-item>
+            </span>
+        </ion-list>
   </ion-content>
 </ion-view>

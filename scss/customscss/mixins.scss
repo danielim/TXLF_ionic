@@ -1,0 +1,9 @@
+@mixin astyle($vcolor, $acolor) { 
+    a:link,
+    a:visited {
+        color: $vcolor;
+    }
+    a:active {
+        color: $acolor;
+    }
+}

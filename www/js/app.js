@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of "requires"
 // "starter.controllers" is found in controllers.js
 var db = null;
-angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.directives", "ngCordova"])
+angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.directives", "ngCordova", "angular.filter"])
 
 .run(function($ionicPlatform, $timeout, $cordovaSQLite) {
 "use strict";
@@ -35,8 +35,10 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
 
     var dbMySchedule = "CREATE TABLE IF NOT EXISTS MySchedule (" +
                    "msid INTEGER PRIMARY KEY, " +
+                   "date TEXT, " +
                    "time TEXT, " +
                    "title TEXT, " +
+                   "sorter TEXT, " +
                    "link TEXT" +
                    ")";
 

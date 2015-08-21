@@ -1,24 +1,36 @@
 <ion-view view-title="Schedule">
   <ion-content ng-controller="SchedCtrl">
 
-  <h1 class="headroom">Friday, August 21st</h1>
+  <h2 class="headroom">Friday, August 21st</h2>
         <ion-list class="list list-inset">
-            <span ng-repeat="i in schedFri"> 
-            <span ng-repeat="(key, value) in i"> 
-                <ion-item ng-if="key == 'time'" class="item item-divider item-complex-divider">
-                            {{value}}
+            <span ng-repeat="i in schedFri | groupBy: 'time' | toArray: true | orderBy: min"> 
+                <ion-item class="item item-divider item-complex-divider">
+                            {{i.$key}}
                 </ion-item>
-                <ion-item ng-if="key == 'title'" class="item item-text-wrap" ng-attr-href="{{i.link ? '#' : undefined}}" ng-click="openUrl('{{i.link}}');">
-                            {{value}}
-                            <ion-option-button ng-show="key !== 'time'" class="button-balanced" ng-click="addMySched(i)">
-                            add
+                <ion-item ng-repeat="sched in i" ng-if="sched.title != undefined" class="item item-text-wrap" ng-attr-href="{{sched.link ? '#' : undefined}}" ng-click="openUrl('{{sched.link}}');">
+                            {{sched.title}}
+                            <ion-option-button class="button-balanced" ng-click="addMySched(sched, 'fri')">
+                            Add
                             </ion-option-button>
                 </ion-item>
             </span>
-            </span>
         </ion-list>
         
-<!--  <h1 class="headroom">Saturday, August 22nd</h1>
+  <h2 class="headroom">Saturday, August 21st</h2>
+        <ion-list class="list list-inset">
+            <span ng-repeat="x in schedSat | groupBy: 'time' | toArray: true | orderBy: min"> 
+                <ion-item class="item item-divider item-complex-divider item-text-wrap">
+                            {{x.$key}}
+                </ion-item>
+                <ion-item ng-repeat="sched in x" ng-if="sched.title != undefined" class="item item-text-wrap" ng-attr-href="{{sched.link ? '#' : undefined}}" ng-click="openUrl('{{sched.link}}');">
+                            {{sched.title}}
+                            <ion-option-button class="button-balanced" ng-click="addMySched(sched, 'sat')">
+                            Add
+                            </ion-option-button>
+                </ion-item>
+            </span>
+        </ion-list>
+<!--  <h2 class="headroom">Saturday, August 22nd</h2>
         <ion-list class="list list-inset" >
         <span ng-repeat="x in schedSat">
             <span ng-repeat="(key, value) in x"> 
@@ -43,7 +55,7 @@
 
 
 
-<!--  <h1 class="headroom">Friday, August 21</h1>
+<!--  <h2 class="headroom">Friday, August 21</h2>
     <table class="list list-inset">
         <tbody ng-repeat="i in schedFri">
             <tr ng-repeat="(key, value) in i">
@@ -57,7 +69,7 @@
         </tbody>
     </table>
         
-  <h1 class="headroom">Saturday, August 22</h1>
+  <h2 class="headroom">Saturday, August 22</h2>
     <table class="list list-inset">
         <tbody ng-repeat="x in schedSat">
             <tr ng-repeat="(key, value) in x">

@@ -5,9 +5,10 @@
   </header>
 
   <h2>Address:</h2>
-  <a ng-init="geoLink();" ng-href="{{ mapLink }}">
       <div>
+        <a ng-init="geolink();" ng-href="{{ maplink }}">
           <button class="button"><i class="ion-ios-location"></i></button>
+        </a>
       </div>
       <div>
       <p>
@@ -16,11 +17,16 @@
         USA<br />
       </p>
       </div>
-  </a>
   <p>
   TEL: <a href="tel:+15123926450"> +1-512-392-6450</a><br />
   FAX: +1-512-392-6451<br />
   </p>
     <button class="button button-positive" ng-click="copyText('1001 E. McCarty Lane, San Marcos, Texas, 78666, USA')">Copy Address</button>
+
+    <h2>Parking</h2>
+    <p>The San Marcos Convention Center has ample parking on-site!</p>
+    <h2>Hotels</h2>
+    <p>For hotel options take a look at our <a href="https://2015.texaslinuxfest.org/hotels">hotels page</a>.</p>
+    <p>If you are staying at the embassy suites, we have a special group rate for Texas Linux Festival attendees and it can be redeemed using the following booking code online or by calling and using over the phone: <a href="http://2015.texaslinuxfest.org/hotels#sthash.HBtI8G7B.dpuf">TXLinux2015</a></p>
   </ion-content>
 </ion-view>

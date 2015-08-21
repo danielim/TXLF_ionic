@@ -1,4 +1,4 @@
-angular.module("txlf.services", ["ngCordova"])
+angular.module("txlf.services", ["ngCordova", "ab-base64"])
 
 .factory("rssParse", function($scope) {
     //get the rss feed.
@@ -27,23 +27,47 @@ angular.module("txlf.services", ["ngCordova"])
     return self;
 })
 
-.factory("Share", function($cordovaSocialSharing, Popup) {
+.factory("Share", function($cordovaSocialSharing, Popup, Toast, Localdb, DataMan, base64) {
 
     "use strict";
     var self = this;
 
-    self.onShare = function(message, subject, file, link) {
+    self.convContactCSV = function(data){
+        var result = "id,name,workphone,mobile,email,website,title,company,address\n";
+        for(var i = 0; i < data.length; i++) {
+            result += data[i].clid + "," + data[i].name + "," + data[i].workphone + "," + data[i].mobile + "," + data[i].email + "," + data[i].website + "," + data[i].title + "," + data[i].company + "," + data[i].address + "\n";
+        }
+        return result;
+    };
 
-            Popup.alertPop("Error", " Contact was not saved.");
-            $cordovaSocialSharing.share(message, subject, file, link)
-            .then(function(res) {
-                    return res;
-                }, function(err) {
-                    return err;
-                }
-            );
+
+    self.shareContacts = function(){
+       Popup.confirmPop("are you sure you wish to share your contact list?")
+           .then(function(res){
+               if(res){
+                   DataMan.fetchContactList();
+                   var csvContact = "data:text/csv;base64," + base64.urlencode(self.convContactCSV(DataMan.contactList));
+                   console.log("ok button for contact share pushed");
+                   //var message = self.convContactCSV(DataMan.contactList);
+                   var message = "Thanks for coming to Texas Linux Fest 2015! We hope to see you next year.";
+                   var subject = "Contact List from TXLF 2015";
+                   var to = null;
+                   var cc = null;
+                   var bcc = null;
+                   var file = csvContact;
+                   var link = null;
+                   $cordovaSocialSharing.shareViaEmail(message, subject, to, cc, bcc, file, link, function() {
+                           Toast.showToast("content has been shared.", "short", "bottom");
+                       }, function() {
+                           Toast.showToast("error: contact could not be shared.", "short", "bottom");
+                       });
+               } else {
+                   Toast.showToast("cancelled.", "short", "bottom");
+               }
+           });
 
     };
+
 
     return self;
 })
@@ -95,8 +119,10 @@ angular.module("txlf.services", ["ngCordova"])
 
     self.scanQR = function() {
         $cordovaBarcodeScanner.scan().then(function(QRData){
-            Popup.confirmPop("Contact Data", QRData.text + "\n Save contact?")
+            var pData = JSON.parse(QRData.text);
+            Popup.confirmPop("Contact", pData.n + "\n Save contact?")
                 .then(function(res){
+
                     if(res){
                         console.log("OK button for contact save pushed");
                         DataMan.storeContactList(QRData.text);
@@ -160,7 +186,7 @@ angular.module("txlf.services", ["ngCordova"])
     };
 
     // My Schedule methods.
-    self.storeMySchedule = function(time, title, link){
+    self.storeMySchedule = function(time, title, link, sorter, date){
 
         // Calling getBy(title) to check if there's a duplicate in the database
         Localdb.getBy("MySchedule", "title", "title", title).then(function(res){
@@ -168,8 +194,9 @@ angular.module("txlf.services", ["ngCordova"])
             if (JSON.stringify(res) !== undefined) {
                 Toast.showToast("Presentation already in your schedule.", "short", "bottom");
             } else {
-                Localdb.inputMySchedule(time, title, link).then(function(){
-                    Toast.showToast("Presentation stored.", "short", "bottom");
+                Toast.showToast("Presentation stored.", "short", "bottom");
+                Localdb.inputMySchedule(time, title, link, sorter, date).then(function(){
+                    self.fetchMySchedule(date);
                 }, function(err) {
                     Toast.showToast("Error: Presentation not stored.\n" + err, "short", "bottom");
                 });
@@ -177,16 +204,42 @@ angular.module("txlf.services", ["ngCordova"])
         }, function(err){
             console.log("dupCheck err: " + err);
         });
-        self.fetchMySchedule();
     };
 
-    self.fetchMySchedule = function(){
-        Localdb.getMySchedule().then(function(res){
-            console.log("fetch result MySchedule string: " + JSON.stringify(res));
-            angular.copy(res, self.mySchedule);
+    self.delMySchedule = function(item){
+
+        // Calling getBy(title) to check if there's a duplicate in the database
+        Localdb.getBy("MySchedule", "msid", "msid", item.msid).then(function(res){
+            console.log("getBy msid response: " + JSON.stringify(res));
+            if (JSON.stringify(res) !== undefined) {
+                Toast.showToast("Presentation removed from your schedule.", "short", "bottom");
+                Localdb.deleteMSentry(item.msid).then(function(){
+                    self.fetchMySchedule(item.date);
+                }, function(err) {
+                    console.log("delMySchedule error: " + err);
+                });
+            } else {
+                    Toast.showToast("Error: Presentation not in your schedule.", "short", "bottom");
+            }
         }, function(err){
-            console.log("fetchMySchedule error: " + err);
+            console.log("getBy(msid) err: " + err);
         });
+    };
+
+    self.fetchMySchedule = function(date){
+       if (self.mySchedule[date] == undefined){
+           self.mySchedule[date] = [];
+       }
+       Localdb.getListBy("MySchedule", "msid, date, title, link, sorter, time", "date", date).then(function(res){
+           angular.copy(res, self.mySchedule[date]);
+           console.log("getListBy: " + JSON.stringify(self.mySchedule.fri));
+       });
+//        Localdb.getMySchedule().then(function(res){
+//            console.log("fetch result MySchedule string: " + JSON.stringify(res));
+//            angular.copy(res, self.mySchedule);
+//        }, function(err){
+//            console.log("fetchMySchedule error: " + err);
+//        });
     };
 
 
@@ -255,7 +308,7 @@ angular.module("txlf.services", ["ngCordova"])
 
     // Get data from database
     self.getMySchedule = function(){
-        return DBA.query("SELECT msid, time, title, link FROM MySchedule")
+        return DBA.query("SELECT msid, time, title, link, sorter, date FROM MySchedule")
             .then(function(result){
                 return DBA.getAll(result);
             });
@@ -277,6 +330,13 @@ angular.module("txlf.services", ["ngCordova"])
                 console.log(error);
             });
     };
+    self.getListBy = function(table, query, key, value) {
+            var parameters = [value];
+                return DBA.query("SELECT " + query + " FROM " + table + " WHERE " + key + " = (?)", parameters)
+                .then(function(result) {
+                    return DBA.getAll(result);
+                });
+    };
 
     // Get single items.
 
@@ -291,9 +351,9 @@ angular.module("txlf.services", ["ngCordova"])
 
 
    // Input into database
-    self.inputMySchedule = function(time, title, link) {
-        var parameters = [time, title, link];
-        return DBA.query("INSERT INTO MySchedule (time, title, link) VALUES (?, ?, ?)", parameters);
+    self.inputMySchedule = function(time, title, link, sorter, date) {
+        var parameters = [time, title, link, sorter, date];
+        return DBA.query("INSERT INTO MySchedule (time, title, link, sorter, date) VALUES (?, ?, ?, ?, ?)", parameters);
     };
 
     self.inputContactList = function(name, workphone, mobile, email, website, title, company, address) {

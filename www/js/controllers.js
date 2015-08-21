@@ -52,7 +52,6 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 .controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard) {
     "use strict";
     $scope.mapLink = "";
-    $scope.iterateFri = [];
 
     $scope.copyText = function(value){
                         $cordovaClipboard.copy(value).then(function(){
@@ -74,36 +73,64 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 
 })
 
-.controller("SchedCtrl", function($scope, $http, DataMan) {
+.controller("SchedCtrl", function($filter, $scope, $http, DataMan) {
     "use strict";
 
-    $scope.MyScheduleJSON = DataMan.mySchedule;
+    $scope.MyScheduleFri = DataMan.mySchedule.fri;
+    $scope.MyScheduleSat = DataMan.mySchedule.sat;
 
-    $http.get("json/unnestSchedFri.json").success(function(data) {
-        $scope.schedFri = data;
+    $http.get("https://danielim.github.io/TXLF_ionic/prettyFri.json", {timeout: 2000}).then(function(data) {
+        $scope.schedFri = data.data;
+        console.log("prettyFri from gh-pages");
+    }, function() {
+        $http.get("json/prettyFri.json").success(function(data) {
+            $scope.schedFri = data;
+        });
     });
-    $http.get("json/unnestSchedSat.json").success(function(data) {
-        $scope.schedSat = data;
+
+    $http.get("https://danielim.github.io/TXLF_ionic/prettySat.json", {timeout: 2000}).then(function(data) {
+        $scope.schedSat = data.data;
+        console.log("prettySat from gh-pages");
+    }, function() {
+        $http.get("json/prettySat.json").success(function(data) {
+            $scope.schedSat = data;
+        });
     });
 
     $scope.getTime = function(time) {
         $scope.schedTime = time;
     };
 
-    $scope.addMySched = function(item){
+    $scope.min = function(arr) {
+        return $filter('min')
+        ($filter('map')(arr, 'sorter'));
+    };
 
-        console.log("addMySched: " + item.time);
-        DataMan.storeMySchedule(item.time, item.title, item.link);
+    $scope.addMySched = function(item, date){
+
+        console.log("addMySched: " + date);
+        DataMan.storeMySchedule(item.time, item.title, item.link, item.sorter, date);
+        console.log(item.time + item.date + item.title + item.sorter + date);
+    };
+
+    $scope.delMySched = function(item){
+
+        console.log("delMySched: " );
+        DataMan.delMySchedule(item);
     };
 
 
 })
 
-.controller("BarcodeCtrl", function($scope, QRscan, DataMan) {
+.controller("BarcodeCtrl", function($scope, QRscan, DataMan, Share) {
     "use strict";
 
     $scope.scanBarcode = function(){
         QRscan.scanQR();
+    };
+
+    $scope.shareContacts = function(){
+        Share.shareContacts();
     };
 
     $scope.ContactListJSON = DataMan.contactList;

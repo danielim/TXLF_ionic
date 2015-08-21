@@ -1,0 +1,225 @@
+[
+  {
+      "title": "Joan Touzet: Evolve or Perish! Improving OSS Communities the Apache Way"
+    , "link": "https://2015.texaslinuxfest.org/content/evolve-or-perish-improving-oss-communities-apache-way"
+    ,  "time": "9:00AM - 10:00AM"
+    , "sorter": 1
+  }
+  , {
+      "title": "Exhibit Hall Opens"
+     , "time": "10:00AM"
+    , "sorter": 2
+  }
+  , {
+      "title": "The 3-step Process to Getting Attendees to your Open Source Events (Karen Vuong)"
+    , "link": "https://2015.texaslinuxfest.org/content/3-step-process-getting-attendees-your-open-source-events"
+    ,  "time": "10:15AM - 10:40AM"
+    , "sorter": 3
+  }
+  , {
+      "title": "Text-to-Speech & Linux (Ken Starks)"
+    , "link": "https://2015.texaslinuxfest.org/content/text-speech-linux"
+    ,  "time": "10:15AM - 10:40AM"
+    , "sorter": 4
+  }
+  , {
+      "title": "Implementing High Available applications on Red Hat Enterprise Linux 7 (Julio Villarreal)"
+    , "link": "https://2015.texaslinuxfest.org/content/implementing-high-available-applications-red-hat-enterprise-linux-7"
+    ,  "time": "10:15AM - 10:40AM"
+    , "sorter": 5
+  }
+  , {
+      "title": "Be an Inspiration, Not An Impostor (Major Hayden)"
+    , "link": "https://2015.texaslinuxfest.org/content/be-inspiration-not-impostor-how-tell-your-story"
+    ,  "time": "10:40AM - 11:05AM"
+    , "sorter": 6
+  }
+  , {
+      "title": "Impact of Linux flash drives and programs in public library system (Rusty Kuciemba)"
+    , "link": "https://2015.texaslinuxfest.org/content/impact-linux-flash-drives-and-programs-public-library-system"
+    ,  "time": "10:40AM - 11:05AM"
+    , "sorter": 7
+  }
+  , {
+      "title": "Are you currently running an AppSec program? (Matt Tesauro)"
+    , "link": "https://2015.texaslinuxfest.org/content/are-you-currently-running-appsec-program"
+    ,  "time": "10:40AM - 11:05AM"
+    , "sorter": 8
+  }
+  , {
+      "title": "MySQL's NoSQL (David Stokes)"
+    , "link": "https://2015.texaslinuxfest.org/content/mysqls-nosql"
+    ,  "time": "10:40AM - 11:05AM"
+    , "sorter": 9
+  }
+  , {
+      "title": "Surveillance and the Erosion of Weirdness (Deb Nicholson)"
+    , "link": "https://2015.texaslinuxfest.org/content/surveillance-and-erosion-weirdness"
+    ,  "time": "11:20AM - 11:45AM"
+    , "sorter": 10
+  }
+  , {
+      "title": "Ubuntu Phone: Application Lifecycle(Ted Gould)"
+    , "link": "https://2015.texaslinuxfest.org/content/ubuntu-phone-application-lifecycle"
+    ,  "time": "11:20AM - 11:45AM"
+    , "sorter": 11
+  }
+  , {
+      "title": "FreeNAS - ZFS for Home and Office (Aaron Poffenberger)"
+    , "link": "https://2015.texaslinuxfest.org/content/freenas-zfs-home-and-office"
+    ,  "time": "11:20AM - 11:45AM"
+    , "sorter": 12
+  }
+  , {
+      "title": "Juju, the modeling language for Big Data solutions(Amir Sanjar)"
+    , "link": "https://2015.texaslinuxfest.org/content/juju-modeling-language-big-data-solutions"
+    ,  "time": "11:20AM - 11:45AM"
+    , "sorter": 13
+  }
+  , {
+      "title": "SaltStack Beyond Configuration Management (Dave Boucha)"
+    , "link": "https://2015.texaslinuxfest.org/content/beyond-configuration-management-saltstack-event-driven-infrastructure"
+    ,  "time": "11:50AM - 12:15PM"
+    , "sorter": 14
+  }
+  , {
+      "title": "Lunch"
+    ,  "time": "12:15PM-1:30PM"
+    , "sorter": 15
+  }
+  , {
+      "title": "Event Driven Lawn Care(Robert Booth)"
+    , "link": "https://2015.texaslinuxfest.org/content/event-driven-lawn-care"
+    ,  "time": "1:30PM - 1:55PM"
+    , "sorter": 16
+  }
+  , {
+      "title": "Introduction to LibreOffice QA: Bibisecting on Win, Mac, and GNU/Linux (Robinson Tryon)"
+    , "link": "https://2015.texaslinuxfest.org/content/introduction-libreoffice-qa-bibisecting-win-mac-and-gnulinux"
+    ,  "time": "1:30PM - 1:55PM"
+    , "sorter": 17
+  }
+  , {
+      "title": "Service Discovery with Consul (Justin Phelps)"
+    , "link": "https://2015.texaslinuxfest.org/content/service-discovery-consul"
+    ,  "time": "1:30PM - 1:55PM"
+    , "sorter": 18
+  }
+  , {
+      "title": "Penguins all the way up  (Scott Suehle)"
+    , "link": "https://2015.texaslinuxfest.org/content/penguins-all-way"
+    ,  "time": "1:30PM - 1:55PM"
+    , "sorter": 19
+  }
+  , {
+      "title": "Swimming upstream: What does Red Hat do with customer developed patches?(Jim Wildman)"
+    , "link": "https://2015.texaslinuxfest.org/content/swimming-upstream-what-does-red-hat-do-customer-developed-patches"
+    ,  "time": "2:00PM - 2:25PM"
+    , "sorter": 20
+  }
+  , {
+      "title": "Leveraging Linux platform for identity management in Web Applications (Nathan Kinder)"
+    , "link": "https://2015.texaslinuxfest.org/content/leveraging-linux-platform-identity-management-web-applications"
+    ,  "time": "2:00PM - 2:25PM"
+    , "sorter": 21
+  }
+  , {
+      "title": "The Anatomy of a HTTP Request(Alex Juarez)"
+    , "link": "https://2015.texaslinuxfest.org/content/anatomy-http-request"
+    ,  "time": "2:40PM - 3:05PM"
+    , "sorter": 22
+  }
+  , {
+      "title": "Deploying and Maintaining a self healing website infrastructure using salt (Daniel Wallace)"
+    , "link": "https://2015.texaslinuxfest.org/content/deploying-and-maintaining-self-healing-website-infrastructure-using-salt"
+    ,  "time": "2:40PM - 3:05PM"
+    , "sorter": 23 
+  }
+  , {
+      "title": "Containers and Microservices (Adam Miller)"
+    , "link": "https://2015.texaslinuxfest.org/content/containers-and-microservices"
+    ,  "time": "2:40PM - 3:05PM"
+    , "sorter": 24
+  }
+  , {
+      "title": "Cassandra and Spark - Love at First Sight(Nick Bailey)"
+    , "link": "https://2015.texaslinuxfest.org/content/cassandra-and-spark-love-first-sight"
+    ,  "time": "2:40PM - 3:05PM"
+    , "sorter": 25
+  }
+  , {
+      "time": "3:10PM - 3:35PM"
+    , "sorter": 26
+  }
+  , {
+      "title": "Fail Early, Fail Often, Fail Well (Joshua Simmons)"
+    , "link": "https://2015.texaslinuxfest.org/content/fail-early-fail-often-fail-well"
+    ,  "time": "3:50PM - 4:15PM"
+    , "sorter": 27
+  }
+  , {
+      "title": "BSD for Linux Users(Aaron Poffenberger)"
+    , "link": "https://2015.texaslinuxfest.org/content/bsd-linux-users"
+    ,  "time": "3:50PM - 4:15PM"
+    , "sorter": 28
+  }
+  , {
+      "title": "Turtles All The Way: Running Linux on Open Hardware (Rob Landley)"
+    , "link": "https://2015.texaslinuxfest.org/content/turtles-all-way-running-linux-open-hardware"
+    ,  "time": "3:50PM - 4:15PM"
+    , "sorter": 29
+  }
+  , {
+      "title": "Saltstack: The other, other configuration manager(Aaron Rea)"
+    , "link": "https://2015.texaslinuxfest.org/content/saltstack-other-other-configuration-manager"
+    ,  "time": "3:50PM - 4:15PM"
+    , "sorter": 30
+  }
+  , {
+      "title": "If you're not using HTTPS, your website is bad, and you should feel bad!(Daniel Roesler)"
+    , "link": "https://2015.texaslinuxfest.org/content/if-youre-not-using-https-your-website-bad-and-you-should-feel-bad"
+    ,  "time": "4:20PM - 4:45PM"
+    , "sorter": 31
+  }
+  , {
+      "title": "The Evolution of Software Patent Suits(Deb Nicholson)"
+    , "link": "https://2015.texaslinuxfest.org/content/evolution-software-patent-suits"
+    ,  "time": "5:00PM - 5:25PM"
+    , "sorter": 32
+  }
+  , {
+      "title": "IPV6: What is it good for?(Jim Wildman)"
+    , "link": "https://2015.texaslinuxfest.org/content/ipv6-what-it-good"
+    ,  "time": "5:00PM - 5:25PM"
+    , "sorter": 33
+  }
+  , {
+      "title": "Using Open Source to get above the security poverty line (Christopher Coffey)"
+    , "link": "https://2015.texaslinuxfest.org/content/using-open-source-get-above-security-poverty-line"
+    ,  "time": "5:00PM - 5:25PM"
+    , "sorter": 34
+  }
+  , {
+      "title": "Security-enhanced Linux for mere mortals (Thomas Cameron)"
+    , "link": "https://2015.texaslinuxfest.org/content/security-enhanced-linux-mere-mortals"
+    ,  "time": "5:00PM - 5:25PM"
+    , "sorter": 35
+  }
+  , {
+      "title": "MongoDB: Data and Analytics(Bryan Reinero)"
+    , "link": "https://2015.texaslinuxfest.org/content/mongodb-data-and-analytics"
+    ,  "time": "5:30PM - 5:55PM"
+    , "sorter": 36
+  }
+  , {
+      "title": "the use of gnu, linux/unix, and open source software at texas a&m's high performance research computing group(jack perdue)"
+    , "link": "https://2015.texaslinuxfest.org/content/use-gnu-linuxunix-and-open-source-software-texas-ams-high-performance-research-computing"
+    ,  "time": "5:30PM - 5:55PM"
+    , "sorter": 37
+  }
+  , {
+      "title": "Lightning Talks, Birds of a Feather, Raffle"
+      ,"time": "6:00PM - 8:00PM"
+    , "sorter": 38
+  }
+]
