@@ -7690,6 +7690,9 @@ a.button {
 .item-complex-divider > .item-content {
   background-color: inherit; }
 
+.inline-block {
+  display: inline-block; }
+
 body {
   line-height: 1.2em; }
 

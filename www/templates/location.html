@@ -6,22 +6,22 @@
 
   <h2>Address:</h2>
       <div>
-        <a ng-init="geolink();" ng-href="{{ maplink }}">
-          <button class="button"><i class="ion-ios-location"></i></button>
-        </a>
-      </div>
-      <div>
       <p>
         1001 E. McCarty Lane<br />
         San Marcos, Texas 78666<br />
         USA<br />
       </p>
       </div>
+      <div class="inline-block">
+        <a ng-init="geoLink();" ng-href="{{ mapLink }}">
+          <button class="button"><i class="ion-ios-location"></i></button>
+        </a>
+        <button class="button button-positive" ng-click="copyText('1001 E. McCarty Lane, San Marcos, Texas, 78666, USA')">Copy Address</button>
+      </div>
   <p>
   TEL: <a href="tel:+15123926450"> +1-512-392-6450</a><br />
   FAX: +1-512-392-6451<br />
   </p>
-    <button class="button button-positive" ng-click="copyText('1001 E. McCarty Lane, San Marcos, Texas, 78666, USA')">Copy Address</button>
 
     <h2>Parking</h2>
     <p>The San Marcos Convention Center has ample parking on-site!</p>
