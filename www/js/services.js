@@ -32,6 +32,13 @@ angular.module("txlf.services", ["ngCordova", "ab-base64"])
     "use strict";
     var self = this;
 
+    self.convContactCSVcsv = function(data){
+        var result = "";
+        for(var i = 0; i < data.length; i++) {
+            result += data[i].data + "\n";
+        }
+        return result;
+    };
     self.convContactCSV = function(data){
         var result = "id,name,workphone,mobile,email,website,title,company,address\n";
         for(var i = 0; i < data.length; i++) {
@@ -41,15 +48,41 @@ angular.module("txlf.services", ["ngCordova", "ab-base64"])
     };
 
 
+    self.shareContactscsv = function(){
+       Popup.confirmPop("are you sure you wish to share your contact list?")
+           .then(function(res){
+               if(res){
+                   DataMan.fetchContactListcsv();
+                   var csvContactcsv = "data:text/csv;base64," + base64.encode(self.convContactCSVcsv(DataMan.contactListcsv));
+                   console.log("ok button for contact share pushed");
+                   //var message = self.convContactCSV(DataMan.contactList);
+                   var message = "Thanks for coming to Texas Linux Fest 2015!\nWe hope to see you next year.";
+                   var subject = "Contact List from TXLF 2015";
+                   var to = null;
+                   var cc = null;
+                   var bcc = null;
+                   var file = csvContactcsv;
+                   var link = null;
+                   $cordovaSocialSharing.shareViaEmail(message, subject, to, cc, bcc, file, link, function() {
+                           Toast.showToast("content has been shared.", "short", "bottom");
+                       }, function() {
+                           Toast.showToast("error: contact could not be shared.", "short", "bottom");
+                       });
+               } else {
+                   Toast.showToast("cancelled.", "short", "bottom");
+               }
+           });
+
+    };
     self.shareContacts = function(){
        Popup.confirmPop("are you sure you wish to share your contact list?")
            .then(function(res){
                if(res){
                    DataMan.fetchContactList();
-                   var csvContact = "data:text/csv;base64," + base64.urlencode(self.convContactCSV(DataMan.contactList));
+                   var csvContact = "data:text/csv;" + self.convContactCSV(DataMan.contactList);
                    console.log("ok button for contact share pushed");
                    //var message = self.convContactCSV(DataMan.contactList);
-                   var message = "Thanks for coming to Texas Linux Fest 2015! We hope to see you next year.";
+                   var message = "Thanks for coming to Texas Linux Fest 2015!\n We hope to see you next year.";
                    var subject = "Contact List from TXLF 2015";
                    var to = null;
                    var cc = null;
@@ -117,6 +150,25 @@ angular.module("txlf.services", ["ngCordova", "ab-base64"])
     "use strict";
     var self = this;
 
+    self.scanQRcsv = function() {
+        $cordovaBarcodeScanner.scan().then(function(QRData){
+            var pData = QRData.text;
+            Popup.confirmPop("Contact", pData + "\n Save contact?")
+                .then(function(res){
+
+                    if(res){
+                        console.log("OK button for contact save pushed: " + pData);
+                        DataMan.storeContactListcsv(pData);
+                    } else {
+                        Toast.showToast("Cancelled.", "short", "bottom");
+                    }
+                });
+
+        }, function(error) {
+            Popup.alertPop("Error\n", error);
+        });
+    };
+
     self.scanQR = function() {
         $cordovaBarcodeScanner.scan().then(function(QRData){
             var pData = JSON.parse(QRData.text);
@@ -156,7 +208,8 @@ angular.module("txlf.services", ["ngCordova", "ab-base64"])
     "use strict";
 
     var self = this;
-    self.contactList = [];
+    //self.contactList = [];
+    self.contactListcsv = [];
     self.mySchedule = [];
 
     // Contact List methods
@@ -174,6 +227,22 @@ angular.module("txlf.services", ["ngCordova", "ab-base64"])
         console.log("DataMan: input Contact List called after this.");
         Localdb.inputContactList(name, workphone, mobile, email, website, title, company, address);
         self.fetchContactList();
+    };
+
+    self.storeContactListcsv = function(QRtext){
+
+        console.log("DataMan: input Contact List called after this.");
+        Localdb.inputContactListcsv(QRtext);
+        self.fetchContactListcsv();
+    };
+
+    self.fetchContactListcsv = function(){
+        Localdb.getContactListcsv().then(function(res){
+            console.log("fetch result contactListcsv string: " + JSON.stringify(res));
+            angular.copy(res, self.contactListcsv);
+        }, function(err){
+            console.log("fetchContactListcsv error: " + err);
+        });
     };
 
     self.fetchContactList = function(){
@@ -322,14 +391,16 @@ angular.module("txlf.services", ["ngCordova", "ab-base64"])
                 console.log(error);
             });
     };
-    self.getEVERYTHING = function(){
-        return DBA.query("SELECT * FROM ContactList")
+
+    self.getContactListcsv = function(){
+        return DBA.query("SELECT clid, data FROM ContactListcsv")
             .then(function(result){
                 return DBA.getAll(result);
             }, function(error){
                 console.log(error);
             });
     };
+
     self.getListBy = function(table, query, key, value) {
             var parameters = [value];
                 return DBA.query("SELECT " + query + " FROM " + table + " WHERE " + key + " = (?)", parameters)
@@ -354,6 +425,12 @@ angular.module("txlf.services", ["ngCordova", "ab-base64"])
     self.inputMySchedule = function(time, title, link, sorter, date) {
         var parameters = [time, title, link, sorter, date];
         return DBA.query("INSERT INTO MySchedule (time, title, link, sorter, date) VALUES (?, ?, ?, ?, ?)", parameters);
+    };
+
+    self.inputContactListcsv = function(data) {
+        var parameters = [data];
+        console.log(data);
+        return DBA.query("INSERT INTO ContactListcsv (data) VALUES (?)", parameters);
     };
 
     self.inputContactList = function(name, workphone, mobile, email, website, title, company, address) {

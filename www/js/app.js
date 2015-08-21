@@ -42,6 +42,11 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
                    "link TEXT" +
                    ")";
 
+    
+    var dbContactListcsv = "CREATE TABLE IF NOT EXISTS ContactListcsv (" +
+                 "clid INTEGER PRIMARY KEY, " +
+                 "data TEXT" +
+                 ")";
     var dbContactList = "CREATE TABLE IF NOT EXISTS ContactList (" +
                  "clid INTEGER PRIMARY KEY, " +
                  "name TEXT, " +
@@ -73,6 +78,17 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
              console.log("MySchedule tables not dropped");
             }
         );
+    $cordovaSQLite.execute( db, "DROP TABLE IF EXISTS ContactListcsv")
+        .then(
+            function(success){
+             console.log(success);
+             console.log("ContactListcsv tables dropped");
+            },
+            function(fail){
+             console.log(fail);
+             console.log("ContactListcsv tables not dropped");
+            }
+        );
     $cordovaSQLite.execute( db, "DROP TABLE IF EXISTS ContactList")
         .then(
             function(success){
@@ -101,13 +117,15 @@ angular.module("txlf", ["ionic", "txlf.controllers", "txlf.services", "txlf.dire
     var createTables = function(){
             $cordovaSQLite.execute( db, dbMySchedule ).then(console.log(dbMySchedule), function(error){console.log(error)});
 
-            $cordovaSQLite.execute( db, dbContactList ).then(console.log(dbContactList), function(error){console.log(error)});
+            //$cordovaSQLite.execute( db, dbContactList ).then(console.log(dbContactList), function(error){console.log(error)});
+
+            $cordovaSQLite.execute( db, dbContactListcsv ).then(console.log(dbContactListcsv), function(error){console.log(error)});
 
             $cordovaSQLite.execute( db, dbWebCache ).then(console.log("WebCache table created"), function(error){console.log(error)});
     };
 
-    dropAllTables();
-    createTables();
+    //dropAllTables();
+        createTables();
 
   });
 })

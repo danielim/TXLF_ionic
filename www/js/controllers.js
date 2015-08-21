@@ -49,12 +49,13 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 
 })
 
-.controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard) {
+.controller("LocationCtrl", function($scope, DataMan, $cordovaClipboard, Toast) {
     "use strict";
     $scope.mapLink = "";
 
     $scope.copyText = function(value){
                         $cordovaClipboard.copy(value).then(function(){
+                            Toast.showToast("Address copied to your Clipboard.", "short", "bottom");
                             console.log("success");
                         }, function(err){
                             console.log(err);
@@ -125,14 +126,22 @@ angular.module("txlf.controllers", ["ionic", "txlf.services", "txlf.directives",
 .controller("BarcodeCtrl", function($scope, QRscan, DataMan, Share) {
     "use strict";
 
+    $scope.scanBarcodecsv = function(){
+        QRscan.scanQRcsv();
+    };
+
     $scope.scanBarcode = function(){
         QRscan.scanQR();
     };
 
+    $scope.shareContactscsv = function(){
+        Share.shareContactscsv();
+    };
     $scope.shareContacts = function(){
         Share.shareContacts();
     };
 
+    $scope.ContactListcsv = DataMan.contactListcsv;
     $scope.ContactListJSON = DataMan.contactList;
     $scope.ContactList = JSON.stringify(DataMan.contactList);
 

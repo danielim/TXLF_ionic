@@ -2,15 +2,15 @@
   
   <ion-content class="containerTXLF" ng-controller="BarcodeCtrl">
     <h1>Texas Linux Fest 2015</h1>
-    <button class="button button-balanced button-large button-block" ng-click="scanBarcode();">Scan QR Code</button>
-    <button class="button button-royal button-block" ng-click="shareContacts()">Share Contacts</button>
+    <button class="button button-balanced button-large button-block" ng-click="scanBarcodecsv();">Scan QR Code</button>
+    <button class="button button-royal button-block" ng-click="shareContactscsv()">Share Contacts</button>
     
   <h2 class="title">My Contacts</h2>
         <ion-list class="list list-inset">
-        <p ng-if="!ContactListJSON">You have no contacts.</p>
-            <span ng-repeat="i in ContactListJSON"> 
+        <p ng-if="ContactListcsv == []">You have no contacts.</p>
+            <span ng-repeat="i in ContactListcsv"> 
                 <ion-item class="item">
-                {{$index + 1 }} | {{i.name}}
+                {{$index + 1 }} | {{i.data}}
                     <!--<ion-option-button class="button-assertive" ng-click="delContact(sched)">
                     remove
                     </ion-option-button>-->

@@ -1,6 +1,6 @@
 <ion-view view-title="Schedule">
   <ion-content ng-controller="SchedCtrl">
-    <p>Slide an item for a button to add event to your schedule</p>
+    <p class="bar bar-stable">Slide an item for a button to add event to your schedule</p>
   <h2 class="headroom">Friday, August 21st</h2>
         <ion-list class="list list-inset">
             <span ng-repeat="i in schedFri | groupBy: 'time' | toArray: true | orderBy: min"> 
