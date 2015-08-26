@@ -1,8 +1,15 @@
-#Features:
-general info: provide general information about the conference
+#To Do:
+
+1. make a settings state, offer:
+    - toggle web fetch for Schedule/News/etc.
+2. Rewrite http.get data with toggle config in mind.
+
+
+#Planned Features:
+general info: provide general information about the conference.
 News: News on website
-How to get here: address with a button to copy, and under it the map in google maps if available.
-Conference map: interior map of the conference.
+Venue: address with a button to copy, and under it the map in google maps if available.
+Floor map: interior map of the conference.
 Schedule: Display schedule. Allow adding talks to user schedule, if conflicting time, offer replacement or cancellation.
 My schedule: -remove item from own schedule.
              -display personal schedule.
