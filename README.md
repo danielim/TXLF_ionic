@@ -29,3 +29,13 @@ nl.x-services.plugins.socialsharing 4.3.19 "SocialSharing"
 nl.x-services.plugins.toast 2.1.1 "Toast"
 phonegap-plugin-barcodescanner 4.0.1 "BarcodeScanner"
 ```
+
+run `cordova plugin add <first column of the list above>`
+
+Run:
+
+```
+ionic serve # Test on browser
+ionic serve --labs # Test on browser emulating device size
+ionic run android # Test on android device or emulation if no device found
+```
