@@ -6,11 +6,17 @@ It isn't optimized yet.
 ##To install:
 
 Clone the repository to your working directory:
-```git clone https://github.com/danielim/TXLF_ionic```
+```
+git clone https://github.com/danielim/TXLF_ionic
+```
 
-Install dependencies: 
-```npm install```
-```bower install```
+Install dependencies:
+```
+npm install
+```
+```
+bower install
+```
 
 Cordova Plugins:
 ```
