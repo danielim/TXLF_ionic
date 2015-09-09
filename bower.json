@@ -3,6 +3,8 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0",
-    "ngCordova": "latest"
+    "ngCordova": "latest",
+    "angular-utf8-base64": "latest",
+    "angular-filter": "latest"
   }
 }
