@@ -9,13 +9,11 @@ Clone the repository to your working directory:
 ```
 git clone https://github.com/danielim/TXLF_ionic
 ```
+Dependencies: node, bower, cordova
 
 Install dependencies:
 ```
-npm install
-```
-```
-bower install
+npm install && bower install
 ```
 
 Cordova Plugins:
